@@ -77,13 +77,13 @@ export default {
   methods: {
 
       setResource(source){
-
+        //取资源
         axios.get('https://newsapi.org/v2/top-headlines?sources='+source+'&apiKey='+this.api_key)
         .then(response => {
           //this.articles = response.data.articles
           this.articles = response.data.articles
           console.log('Source Articles:')
-          console.log(response.data.articles) // This will give you access to the full object
+          console.log(response.data.articles) //返回articles
         })
         .catch(e => {
           this.errors.push(e)
