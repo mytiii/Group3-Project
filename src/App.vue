@@ -6,10 +6,16 @@
   <!--The SideMenu Component go here-->
   <SideMenu :drawer="drawer"  :api_key="api_key" @selectsource="setResource" ></SideMenu>
 
+    <!--顶部工具栏-->
   <v-toolbar fixed app light clipped-left color="primary" class="elevation-2">
     <v-toolbar-side-icon @click="drawer = !drawer"  class="white--text"></v-toolbar-side-icon>
     <v-toolbar-title class="white--text">News App</v-toolbar-title>
+
+      <v-icon>mdi-heart</v-icon>
+
   </v-toolbar>
+
+
 
   <v-content>
     <v-container fluid>
@@ -18,7 +24,11 @@
       <MainContent :articles="articles"></MainContent>
 
     </v-container>
+
+
    </v-content>
+
+    <!--底部-->
    <v-footer class="secondary" app>
       <v-layout row wrap align-center>
         <v-flex xs12>
