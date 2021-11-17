@@ -1,5 +1,5 @@
 <template>
-
+<!--新闻内容部分-->
     <v-layout row wrap align-center>
 
           <v-flex xs8  offset-md2>
@@ -25,9 +25,9 @@
                 <v-chip small color="secondary" class="white--text">
                   {{article.source.name}}
                 </v-chip>
-
+                <!--自动填充-->
                 <v-spacer></v-spacer>
-
+                <!--按钮-->
                 <v-btn icon class="red--text">
                   <v-icon small>fa-reddit</v-icon>
                 </v-btn>
@@ -59,6 +59,8 @@
 
 </template>
 
+
+<!--作为部件导出，指明需要articles，api给的是array类型-->
 <script>
 
 export default {

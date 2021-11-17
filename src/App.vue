@@ -3,7 +3,7 @@
 
   <v-app light>
 
-  <!--The SideMenu Component go here-->
+  <!--侧边栏，直接将读取到的apikey丢进去-->
   <SideMenu :drawer="drawer"  :api_key="api_key" @selectsource="setResource" ></SideMenu>
 
     <!--顶部工具栏-->
@@ -16,11 +16,11 @@
   </v-toolbar>
 
 
-
+  <!--中间内容，展示获取的-->
   <v-content>
     <v-container fluid>
 
-      <!--The MainContent Component go here-->
+      <!--MainContent-->
       <MainContent :articles="articles"></MainContent>
 
     </v-container>
@@ -63,7 +63,7 @@ export default {
   //返回数据
   data() {
     return {
-      drawer: true, //true/false表示开关
+      drawer: true, //true、false表示开关
       api_key:'c2c643c4011646c98038c89c237f5be2',//api接口密钥
       articles: [],
       errors: []

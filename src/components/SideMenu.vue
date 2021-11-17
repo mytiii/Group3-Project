@@ -1,5 +1,5 @@
 <template>
-
+<!--用drawer控制开关-->
   <v-navigation-drawer v-model="drawer" fixed app clipped class="drawer-style"   id="style-1">
 
 
@@ -47,24 +47,27 @@ export default {
     errors: []
   }),
 
+  /*生命周期*/
+  /*将从api接口get到的sources，*/
   created () {
     axios.get('https://newsapi.org/v2/sources?language=en&apiKey='+this.api_key)
       .then(response => {
         //this.articles = response.data.articles
         this.sources = response.data.sources
         console.log('data:')
-        console.log(response.data.sources) // This will give you access to the full object
-      })
+        console.log(response.data.sources) // 改变response.data.sources，展示在页面上
+      })/*catch下错误*/
       .catch(e => {
         this.errors.push(e)
       })
   },
 
+  /**/
   methods: {
       getImgUrl(pic) {
          return require('../assets/images/'+pic+'.png')
       },
-
+    /*触发器*/
       selectSource(source){
         this.$emit('selectsource',source)
       }
@@ -73,6 +76,7 @@ export default {
 }
 </script>
 
+<!--样式-->
 <style scoped>
 
   #style-1::-webkit-scrollbar {
