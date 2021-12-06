@@ -6,15 +6,21 @@
   <!--侧边栏，直接将读取到的apikey丢进去-->
   <SideMenu :drawer="drawer"  :api_key="api_key" @selectsource="setResource" ></SideMenu>
 
+    <!--顶部栏
+    <LoginRegister  @adjustdrawer="adjustDrawer"></LoginRegister>-->
+
     <!--顶部工具栏-->
   <v-toolbar fixed app light clipped-left color="primary" class="elevation-2">
     <v-toolbar-side-icon @click="drawer = !drawer"  class="white--text"></v-toolbar-side-icon>
-    <v-toolbar-title class="white--text">News App</v-toolbar-title>
 
+    <v-toolbar-title class="white--text">News App</v-toolbar-title>
+      <v-btn @click="ShowLogin">Login </v-btn>
       <v-icon>mdi-heart</v-icon>
 
   </v-toolbar>
 
+
+    <Login v-if="LoginShow" ></Login>
 
   <!--中间内容，展示获取的-->
   <v-content>
@@ -33,7 +39,7 @@
       <v-layout row wrap align-center>
         <v-flex xs12>
           <div class="white--text ml-3">
-            Made with
+            Made by
             <a class="white--text" href="https://github.com/mytiii" target="_blank">mytiii</a>
           </div>
         </v-flex>
@@ -50,12 +56,17 @@
 
 import axios from 'axios' //importing the axios a HTTP library to connects the app with the API
 import SideMenu from './components/SideMenu.vue' // import the SideMenu component
-import MainContent from './components/MainContent.vue' // import the MainContent component
+//import Login from "./Pages/Login";
+import MainContent from './components/MainContent.vue'
+import LoginRegister from "./components/LoginRegister";
+import Login from "./Pages/Login"; // import the MainContent component
 
 
 export default {
 
   components: {
+    Login,
+      LoginRegister,
       SideMenu,
       MainContent
   },
@@ -66,7 +77,8 @@ export default {
       drawer: true, //true、false表示开关
       api_key:'c2c643c4011646c98038c89c237f5be2',//api接口密钥
       articles: [],
-      errors: []
+      errors: [],
+      LoginShow:false
     }
   },
 
@@ -99,6 +111,12 @@ export default {
           this.errors.push(e)
         })
 
+      },
+      adjustDrawer(drawer){
+        SideMenu.drawer=!SideMenu.drawer;
+      },
+      ShowLogin(){
+        this.ShowLogin=true;
       }
 
 

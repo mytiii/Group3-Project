@@ -6,6 +6,7 @@ import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import AOS from "aos";
 import "aos/dist/aos.css";
+import router from './router.js'
 
 Vue.use(Vuetify)
 
@@ -18,6 +19,7 @@ new Vue({
   created() {
     AOS.init({ disable: "phone" });
   },
+  router,
   components: { App },
   template: '<App/>'
 })
