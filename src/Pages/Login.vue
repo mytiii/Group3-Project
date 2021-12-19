@@ -1,84 +1,66 @@
-<template>
-  <div id="login">
-    <v-card
-      class="overflow-hidden"
-      color="purple lighten-1"
-      dark
-    >
-      <v-toolbar
-        flat
-        color="purple"
-      >
-        <v-icon>mdi-account</v-icon>
-        <v-toolbar-title class="font-weight-light">
-          User Profile
-        </v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn
-          color="purple darken-3"
-          fab
-          small
-          @click="isEditing = !isEditing"
-        >
-          <v-icon v-if="isEditing">
-            mdi-close
-          </v-icon>
-          <v-icon v-else>
-            mdi-pencil
-          </v-icon>
-        </v-btn>
-      </v-toolbar>
-      <v-card-text>
-        <v-text-field
-          :disabled="!isEditing"
-          color="white"
-          label="Name"
-        ></v-text-field>
-        <v-autocomplete
-          :disabled="!isEditing"
-          :items="states"
-          :filter="customFilter"
-          color="white"
-          item-text="name"
-          label="State"
-        ></v-autocomplete>
-      </v-card-text>
-      <v-divider></v-divider>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn
-          :disabled="!isEditing"
-          color="success"
-          @click="save"
-        >
-          Save
-        </v-btn>
-      </v-card-actions>
-      <v-snackbar
-        v-model="hasSaved"
-        :timeout="2000"
-        absolute
-        bottom
-        left
-      >
-        Your profile has been updated
-      </v-snackbar>
-    </v-card>
-  </div>
 
+<template>
+  <div>
+    <div class="login-wrap" v-show="showLogin">
+      <h3>Login</h3>
+      <p v-show="showTishi">{{tishi}}</p>
+      <input type="text" placeholder="Username" v-model="username">
+      <input type="password" placeholder="Password" v-model="password">
+      <button @click="Login">Login</button>
+
+    </div>
+
+    <div class="register-wrap" v-show="showRegister">
+      <h3>Register</h3>
+      <p v-show="showTishi">{{tishi}}</p>
+      <input type="text" placeholder="Username" v-model="username">
+      <input type="password" placeholder="Password" v-model="password">
+      <button v-on:click="register">Register</button>
+      <span v-on:click="ToLogin">Have account?Sign in</span>
+    </div>
+  </div>
 </template>
 
+<style>
+  .login-wrap{text-align:center;}
+  input{display:block; width:250px; height:40px; line-height:40px; margin:0 auto; margin-bottom: 10px; outline:none; border:1px solid #888; padding:10px; box-sizing:border-box;}
+  p{color:red;}
+  button{display:block; width:250px; height:40px; line-height: 40px; margin:0 auto; border:none; background-color:#41b883; color:#fff; font-size:16px; margin-bottom:5px;}
+  span{cursor:pointer;}
+  span:hover{color:#41b883;}
+</style>
+
 <script>
-  export default {
-    name:"Login",
-    data () {
-      return {
-        msg: "Login"
+  export default{
+    data(){
+      return{
+        showLogin: true,
+        showRegister: false,
+        showTishi: false,
+        tishi: '',
+        username: '',
+        password: '',
+        newUsername: '',
+        newPassword: '',
+        msg:'123456',
       }
+    },
+    methods:{
+      Login(){
+        let username = this.username;
+        let password = this.password;
+        this.$http.post('/api/user/addUser',{
+          username:username,
+          password: password
+        });
+
+        this.$router.push('./Finished');
+      }
+
     }
+
+
   }
 </script>
 
-<style scoped>
 
-</style>

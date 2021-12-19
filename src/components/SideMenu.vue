@@ -5,11 +5,13 @@
 
     <!--侧边List-->
     <v-list dense class="pt-3  white--text" >
+
       <v-list-tile
         v-for="source in sources"
         :key="source.id"
-        @click="selectSource(source.id)"
-      >
+        @click="selectSource(source.id)"><!--选定-->
+      
+
         <v-list-tile-action>
           <v-avatar size="32px">
                 <img
@@ -64,10 +66,12 @@ export default {
 
   /**/
   methods: {
+    /*获取图片路径*/
       getImgUrl(pic) {
          return require('../assets/images/'+pic+'.png')
       },
     /*触发器*/
+    //实际上就是将source。id完成改变
       selectSource(source){
         this.$emit('selectsource',source)
       }
