@@ -1,2 +1,2 @@
-# vue-news-app-with-vuetify-master
+# Group3 Project
 Work of WebProject
